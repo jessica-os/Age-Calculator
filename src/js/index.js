@@ -1,10 +1,10 @@
 const form = document.querySelector(".form");
 const btn = document.querySelector(".btn-icon");
+
 let inputs = document.querySelectorAll("input");
 let labels = document.querySelectorAll("label");
-let spansMgsVazios = document.querySelectorAll(".empty-input");
+let spansEmptyInput = document.querySelectorAll(".empty-input");
 let wrongValue = document.querySelectorAll(".wrong-value");
-const msg = document.querySelector(".msg-error");
 
 const resultDay = document.querySelector(".days");
 const resultMonth = document.querySelector(".months");
@@ -21,23 +21,24 @@ btn.addEventListener("click", () => {
 });
 
 const validateEmptyInputs = (inputs) => {
-  let camposVazio = false;
+  let emptyField = false;
   inputs.forEach((input, index) => {
     if (input.value === "") {
       labels[index].classList.add("error");
-      spansMgsVazios[index].style.display = "block";
+      spansEmptyInput[index].style.display = "block";
       input.classList.add("error");
-      camposVazio = true;
+
+      emptyField = true;
     } else {
       labels[index].classList.remove("error");
-      spansMgsVazios[index].style.display = "none";
+      spansEmptyInput[index].style.display = "none";
       input.classList.remove("error");
       validateDay(inputs);
       validateMonth(inputs);
-      validaYear(inputs);
+      validateYear(inputs);
     }
   });
-  return camposVazio;
+  return emptyField;
 };
 
 const validateDay = (inputs) => {
@@ -61,7 +62,7 @@ const validateMonth = (inputs) => {
   }
 };
 
-const validaYear = (inputs) => {
+const validateYear = (inputs) => {
   const year = parseInt(inputs[2].value, 10);
   if (year > 2023 || year <= 0) {
     inputs[2].nextElementSibling.style.display = "none";
@@ -89,11 +90,10 @@ function getDates() {
     resultYear.innerHTML = "--";
     resultDay.innerHTML = "--";
     resultMonth.innerHTML = "--";
-    wrongValue[0].style.display = "block";
-    wrongValue[1].style.display = "block";
-    wrongValue[2].style.display = "block";
-    wrongValue[0].innerHTML = "the date must be in the past";
-    wrongValue[1].innerHTML = "the date must be in the past";
-    wrongValue[2].innerHTML = "the date must be in the past";
+
+    wrongValue.forEach((msg) => {
+      msg.style.display = "block";
+      msg.innerHTML = "The date must be in the past";
+    });
   }
 }

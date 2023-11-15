@@ -86,19 +86,14 @@ input::placeholder {
   display: none;
 }
 
-.wrong-value-day {
+.wrong-value {
   color: var(--Light-red);
   font-style: italic;
   display: none;
 }
 
-.wrong-value-month {
-  color: var(--Light-red);
-  font-style: italic;
-  display: none;
-}
-
-.wrong-value-year {
+.msg-error{
+  font-size: 1rem;
   color: var(--Light-red);
   font-style: italic;
   display: none;
